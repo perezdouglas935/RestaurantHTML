@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ristorante Il Gusto Italiano</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #2b1d0e;
+      background-image: url('https://placehold.co/1920x1080/2b1d0e/2b1d0e');
+      font-family: 'Lato', sans-serif;
+      color: #3a2a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 16px;
+    }
+
+    /* Hero Banner */
+    .hero {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      padding: 48px 24px 32px;
+      background: linear-gradient(135deg, #1a0e05 0%, #3b1f0a 50%, #1a0e05 100%);
+      border-top: 4px solid #c9a84c;
+      border-bottom: 4px solid #c9a84c;
+      margin-bottom: 0;
+      position: relative;
+    }
+    .hero::before, .hero::after {
+      content: '';
+      display: block;
+      height: 2px;
+      background: #c9a84c;
+      margin: 6px auto;
+      width: 60%;
+    }
+    .hero-sub {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      color: #c9a84c;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      color: #f5e6c8;
+      letter-spacing: 0.08em;
+      line-height: 1.1;
+    }
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: #c9a84c;
+      margin-top: 10px;
+      letter-spacing: 0.1em;
+    }
+    .olive-divider {
+      color: #c9a84c;
+      font-size: 1.4rem;
+      margin: 12px 0 0;
+      letter-spacing: 0.3em;
+    }
+
+    /* Menu Card */
+    .menu-card {
+      width: 100%;
+      max-width: 900px;
+      background: #fdf6e3;
+      background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(201,168,76,0.07) 0%, transparent 60%);
+      border-left: 4px solid #c9a84c;
+      border-right: 4px solid #c9a84c;
+      border-bottom: 4px solid #c9a84c;
+      padding: 48px clamp(20px, 5vw, 64px) 56px;
+    }
+
+    /* Section */
+    .section { margin-bottom: 44px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .section-header .line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #c9a84c);
+    }
+    .section-header .line.right {
+      background: linear-gradient(to left, transparent, #c9a84c);
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #3a2a1a;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .section-header h2 span {
+      display: block;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      color: #8b6914;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 2px;
+    }
+
+    /* Dish Row */
+    .dish {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px dashed #d4b896;
+    }
+    .dish:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .dish-info { flex: 1; }
+    .dish-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #2b1d0e;
+      margin-bottom: 3px;
+    }
+    .dish-desc {
+      font-size: 0.8rem;
+      color: #7a5c3a;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .dish-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #8b6914;
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    /* Drinks — two columns */
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px 40px;
+    }
+    @media (max-width: 600px) {
+      .drinks-grid { grid-template-columns: 1fr; }
+    }
+
+    .drinks-sub-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8b6914;
+      border-bottom: 1px solid #c9a84c;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+    }
+
+    .drink-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .drink-row:last-child { margin-bottom: 0; }
+    .drink-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #2b1d0e;
+    }
+    .drink-desc {
+      font-size: 0.72rem;
+      color: #7a5c3a;
+      font-style: italic;
+    }
+    .drink-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #8b6914;
+      white-space: nowrap;
+    }
+
+    /* Footer */
+    .menu-footer {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      padding: 20px;
+      background: #1a0e05;
+      border: 4px solid #c9a84c;
+      border-top: none;
+    }
+    .menu-footer p {
+      font-size: 0.72rem;
+      color: #c9a84c;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <p class="hero-sub">Ristorante</p>
+    <h1>Il Gusto Italiano</h1>
+    <p class="hero-tagline">Cucina Autentica dal 1974</p>
+    <div class="olive-divider">🫒 ✦ 🫒</div>
+  </div>
+
+  <!-- Menu Card -->
+  <div class="menu-card">
+
+    <!-- ANTIPASTI -->
+    <div class="section">
+      <div class="section-header">
+        <div class="line"></div>
+        <h2>Antipasti <span>Starters</span></h2>
+        <div class="line right"></div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Bruschetta Classica</div>
+          <div class="dish-desc">Grilled sourdough, San Marzano tomatoes, fresh basil, extra virgin olive oil</div>
+        </div>
+        <div class="dish-price">€9</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Burrata Pugliese</div>
+          <div class="dish-desc">Creamy burrata, roasted cherry tomatoes, basil oil, toasted pine nuts</div>
+        </div>
+        <div class="dish-price">€14</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Tagliere di Salumi e Formaggi</div>
+          <div class="dish-desc">Selection of Italian cured meats, aged Parmigiano, Pecorino, honeycomb, grissini</div>
+        </div>
+        <div class="dish-price">€18</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Fritto Misto di Mare</div>
+          <div class="dish-desc">Lightly battered calamari, prawns, zucchini, served with lemon aioli</div>
+        </div>
+        <div class="dish-price">€16</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Carpaccio di Manzo</div>
+          <div class="dish-desc">Thinly sliced beef tenderloin, rocket, shaved Parmigiano, capers, truffle oil</div>
+        </div>
+        <div class="dish-price">€17</div>
+      </div>
+    </div>
+
+    <!-- PRIMI PIATTI -->
+    <div class="section">
+      <div class="section-header">
+        <div class="line"></div>
+        <h2>Primi Piatti <span>Entrées</span></h2>
+        <div class="line right"></div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Tagliatelle al Ragù Bolognese</div>
+          <div class="dish-desc">Handmade egg tagliatelle, slow-braised beef & pork ragù, Parmigiano Reggiano</div>
+        </div>
+        <div class="dish-price">€22</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Spaghetti alla Carbonara</div>
+          <div class="dish-desc">Guanciale, free-range egg yolk, Pecorino Romano, cracked black pepper — no cream</div>
+        </div>
+        <div class="dish-price">€20</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Risotto ai Funghi Porcini</div>
+          <div class="dish-desc">Carnaroli rice, wild porcini mushrooms, white wine, aged Parmigiano, truffle butter</div>
+        </div>
+        <div class="dish-price">€23</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Gnocchi alla Sorrentina</div>
+          <div class="dish-desc">Potato gnocchi, San Marzano tomato sauce, fresh fior di latte mozzarella, basil</div>
+        </div>
+        <div class="dish-price">€19</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Lasagna Emiliana</div>
+          <div class="dish-desc">Layered fresh pasta, slow-cooked ragù, béchamel, Parmigiano, baked to golden perfection</div>
+        </div>
+        <div class="dish-price">€21</div>
+      </div>
+    </div>
+
+    <!-- DOLCI -->
+    <div class="section">
+      <div class="section-header">
+        <div class="line"></div>
+        <h2>Dolci <span>Desserts</span></h2>
+        <div class="line right"></div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Tiramisù della Casa</div>
+          <div class="dish-desc">Classic espresso-soaked ladyfingers, mascarpone cream, dusted with Valrhona cocoa</div>
+        </div>
+        <div class="dish-price">€10</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Panna Cotta al Lampone</div>
+          <div class="dish-desc">Silky vanilla panna cotta, fresh raspberry coulis, candied lemon zest</div>
+        </div>
+        <div class="dish-price">€9</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Cannoli Siciliani</div>
+          <div class="dish-desc">Crisp pastry shells, sweet ricotta, Bronte pistachios, dark chocolate chips</div>
+        </div>
+        <div class="dish-price">€9</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Gelato Artigianale</div>
+          <div class="dish-desc">Three scoops — choose from Pistachio, Stracciatella, Hazelnut, or Lemon Sorbetto</div>
+        </div>
+        <div class="dish-price">€8</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-info">
+          <div class="dish-name">Torta Caprese</div>
+          <div class="dish-desc">Flourless dark chocolate & almond cake, served warm with vanilla gelato</div>
+        </div>
+        <div class="dish-price">€11</div>
+      </div>
+    </div>
+
+    <!-- BEVANDE -->
+    <div class="section">
+      <div class="section-header">
+        <div class="line"></div>
+        <h2>Bevande <span>Drinks</span></h2>
+        <div class="line right"></div>
+      </div>
+
+      <div class="drinks-grid">
+
+        <!-- Alcoholic -->
+        <div>
+          <div class="drinks-sub-title">🍷 Alcoliche — Alcoholic</div>
+
+          <div class="drink-row">
+            <div>
+              <div class="drink-name">Chianti Classico DOCG</div>
+              <div class="drink-desc">Glass / Bottle</div>
+            </div>
+            <div class="drink-price">€12 / €48</div>
+          </div>
+
+          <div class="drink-row">
+            <div>
+              <div class="drink-name">Prosecco DOCG</div>
+              <div class="drink-desc">Glass / Bottle</div>
+            </div>
+            <div class="drink-price">€10 / €40</div>
+          </div>
+
+          <div class="drink-row">
+            <div>
+              <div class="drink-name">Aperol Spritz</div>
+              <div class="drink-desc">Aperol, Prosecco, soda, orange</div>
+            </div>
+            <div class="drink-price">€12</div>
+          </div>
+
+          <div class="drink-row">
+            <div>
+              <div class="drink-name">Negroni</div>
+              <div class="drink-desc">Gin, Campari, sweet vermouth</div>
+            </div>
+            <div class="drink-price">€13</div>
+          </div>
+
+          <div class="drink-row">
+            <div>
+              <div class="drink-name">Moretti alla Spina</div>
+              <div class="drink-desc">Draught beer, 40cl</div>
+            </div>
+            <div class="drink-price">€7</div>
+          </div>
+        </div>
+
+        <!-- Non-Alcoholic -->
+        <div>
+          <div class="drinks-sub-title">🥤 Analcoliche — Non-Alcoholic</div>
+
+          <div class="drink-row">
+            <div>
+              <div class="drink-name">Acqua San Pellegrino</div>
+              <div class="drink-desc">Still or Sparkling, 750ml</div>
+            </div>
+            <div class="drink-price">€6</div>
+          </div>
+
+          <div class="drink-row">
+            <div>
+              <div class="drink-name">Aranciata San Pellegrino</div>
+              <div class="drink-desc">Italian blood orange soda, 330ml</div>
+            </div>
+            <div class="drink-price">€4.5</div>
+          </div>
+
+          <div class="drink-row">
+            <div>
+              <div class="drink-name">Limonata Artigianale</div>
+              <div class="drink-desc">House-made Amalfi lemon lemonade</div>
+            </div>
+            <div class="drink-price">€5</div>
+          </div>
+
+          <div class="drink-row">
+            <div>
+              <div class="drink-name">Caffè Espresso</div>
+              <div class="drink-desc">Single or double shot</div>
+            </div>
+            <div class="drink-price">€2.5</div>
+          </div>
+
+          <div class="drink-row">
+            <div>
+              <div class="drink-name">Tè Freddo al Pesco</div>
+              <div class="drink-desc">Chilled peach iced tea, fresh mint</div>
+            </div>
+            <div class="drink-price">€4</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- end menu-card -->
+
+  <!-- Footer -->
+  <div class="menu-footer">
+    <p>Please inform your server of any allergies  ✦  Prices include VAT  ✦  Grazie e Buon Appetito!</p>
+  </div>
+
+</body>
+</html>
